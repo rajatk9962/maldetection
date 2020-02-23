@@ -30,7 +30,7 @@ A malicious advertisement detector in real time using NLP
 2. Place 'matlext' folder in htdocs folder in XAMPP.
 3. Import 'maldatabase.sql' database in XAMPP.
 4. Download all modules required for the project contained in 'requirements.txt' file through command prompt using the command: 'pip install -r requirements.txt'
-5. Download Tesseract-OCR (download link for windows)[https://github.com/UB-Mannheim/tesseract/wiki] and chrome webdriver (download link)[https://chromedriver.chromium.org/downloads] separately.
+5. Download Tesseract-OCR [download link for windows: https://github.com/UB-Mannheim/tesseract/wiki] and chrome webdriver [download link: https://chromedriver.chromium.org/downloads] separately.
 6. Perform changes listed in **Modifications** section.
 7. Run app.py
 
