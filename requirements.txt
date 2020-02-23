@@ -1,0 +1,12 @@
+flask 
+pickle
+glob
+pytesseract
+re
+pyspellchecker
+scikit-py
+pandas
+imutils
+numpy
+cv2
+

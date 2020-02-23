@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<style>
+form {
+    margin: auto;
+    width: 35%;
+}
+
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+}
+</style>
+
+<head>
+    <title>Mal ad Prediction</title>
+</head>
+<form action="{{ url_for('main') }}" method="POST">
+    <fieldset>
+        <legend>Input:</legend>
+        Enter URL:
+        <input name="url" type="text" required>
+        <br>
+
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+<br>
+<div class="result" align="center">
+    {% if result %}
+    	
+		<br>
+    	<br> Status:
+   		<p style="font-size:17px">{{ result }}</p>
+    {% endif %}
+</div>
+
+</html>
