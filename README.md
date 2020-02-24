@@ -6,6 +6,8 @@ A malicious advertisement detector in real time using NLP
 
 **ads** folder- dataset of ads used for training.
 
+**chromext** folder- all files required to make the chrome extension.
+
 **maltext** folder- 'index.html' file and 'maltext.php' file to display the result, 'cropped_images' file for images detected by the application.
 
 **model** folder- pickle folder 'malclassifier.pkl' in which the trained model is stored, input vector file 'count_vect' .
@@ -32,6 +34,7 @@ A malicious advertisement detector in real time using NLP
 4. Download all modules required for the project contained in 'requirements.txt' file through command prompt using the command: 'pip install -r requirements.txt'
 5. Download Tesseract-OCR [download link for windows: https://github.com/UB-Mannheim/tesseract/wiki] and chrome webdriver [download link: https://chromedriver.chromium.org/downloads] separately.
 6. Perform changes listed in **Modifications** section.
+7. Create chrome extension using files provided on chrome.
 7. Run app.py
 
 ## Modifications
