@@ -56,14 +56,27 @@ def main():
     text=browser.page_source
     soup = BeautifulSoup(text, "html.parser")
     
+    originallinks=[]
+    
+    
     #find and download all images from website
     imgs = soup.find_all('img')
+    
+    for img in imgs:
+        
+        oglink = img.get ('src')
+        originallinks.append(oglink)
+        
     links = []
     i=0
+    
     for img in imgs:
+        
         link = img.get ('src')
         if 'https://' not in link:
             link = url + link
+        if '.gif' in link:
+            continue
         links.append(link)
         #filename= 'img{}.png'.format(i)
         try:
@@ -112,7 +125,7 @@ def main():
         
         #append result to a corpus 
         corpus.append(review)
-        
+    
             
     
     # Make DataFrame for model
@@ -123,29 +136,37 @@ def main():
     cv = CountVectorizer()
     cv = pickle.load(open('model/count_vect', 'rb'))
     for corps in corpus:
-        corps=[corps]
-        X = cv.transform(corps).toarray()
         
-    # Get the model's prediction
-        prediction = model.predict(X)[0]
-        if prediction==1:
-            predicted.append('malicious')
-        else:
-            predicted.append('benign')
+        if corps=='':
+            predicted.append('notext')
+        else:    
+            corps=[corps]
+            X = cv.transform(corps).toarray()
+            
+        # Get the model's prediction
+            prediction = model.predict(X)[0]
+            if prediction==1:
+                predicted.append('malicious')
+            else:
+                predicted.append('benign')
     combined=[]
+    
     
     #moving images from folder to xampp image folder for frontend
     for i in range(0,len(imagenames_list)):
-        combined.append([imagenames_list[i],predicted[i]])
+        combined.append([imagenames_list[i],predicted[i],originallinks[i]])
         image_name=os.path.basename(imagenames_list[i])
         predict=predicted[i]
+       
+        oglink=originallinks[i]
+       
+        
         shutil.move(r"{}".format(imagenames_list[i]),r"C:\xampp\htdocs\maltext\cropped_images\{}".format(image_name))
         cursor.execute(f"INSERT INTO table1(image_name,result) VALUES ('{image_name}','{predict}')")        
         db.commit()
     
-    #open frontend displaying all the images    
-    browser = webdriver.Chrome(executable_path=r'C:\Users\rajat\Documents\chromedriver.exe')    
-    browser.get('http://localhost/maltext/')
+    
+    
     
     
     # Render the form again, but add in the prediction status
